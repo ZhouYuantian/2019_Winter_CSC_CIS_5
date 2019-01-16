@@ -1,8 +1,8 @@
 /* 
  * File:   main.cpp
  * Author: Dr. Mark E. Lehr
- * Created on January 14, 2019, 1:20 PM
- * Purpose:  Rolling Dice Loop, File I/O
+ * Created on January 16, 2019, 12:55 PM
+ * Purpose:  Craps
  */
 
 //System Libraries
@@ -16,6 +16,7 @@ using namespace std;
 
 //Global Constants, no Global Variables are allowed
 //Math/Physics/Conversions/Higher Dimensions - i.e. PI, e, etc...
+const float PERCENT=100.0f;//Percentage conversion
 
 //Function Prototypes
 
@@ -28,53 +29,52 @@ int main(int argc, char** argv) {
     ifstream in; //Input file
     ofstream out;//Output file
     char die1,die2,sum;//Dice values
-    unsigned int nThrws;//Number of Dice throws
-    unsigned int f2,f3,f4,f5,f6,f7,f8,f9,f10,f11,f12;//Frequency
+    unsigned int nGames;//Number of Games
+    int wins,losses;
     
     //Initialize or input i.e. set variable values
-    sum=0;
-    nThrws=36000;
-    f2=f3=f4=f5=f6=f7=f8=f9=f10=f11=f12=0;
+    nGames=36000;
+    wins=losses=sum=0;
     in.open("nThrows.dat");
     out.open("stat.dat");
     
     //Throw Dice
-    in>>nThrws;
-    for(int thrw=1;thrw<=nThrws;thrw++){
+    in>>nGames;
+    for(int game=1;game<=nGames;game++){
         die1=rand()%6+1;//[1-6]
         die2=rand()%6+1;//[1-6]
         sum=die1+die2;  //[2-12]
         switch(sum){
-            case  2:f2++;break;
-            case  3:f3++;break;
-            case  4:f4++;break;
-            case  5:f5++;break;
-            case  6:f6++;break;
-            case  7:f7++;break;
-            case  8:f8++;break;
-            case  9:f9++;break;
-            case 10:f10++;break;
-            case 11:f11++;break;
-            case 12:f12++;break;
-            default: out<<"Falls outside of range"<<endl;
+            case  2:
+            case  3:
+            case 12:losses++;break;
+            case  7:
+            case 11:wins++;break;
+            default:{
+                bool kpRoln=true;
+                do{
+                    die1=rand()%6+1;//[1-6]
+                    die2=rand()%6+1;//[1-6]
+                    char nwsum=die1+die2;  //[2-12]
+                    if(nwsum==7){
+                        losses++;
+                        kpRoln=false;
+                    }else if(sum==nwsum){
+                        wins++;
+                        kpRoln=false;
+                    }
+                }while(kpRoln);
+            }
         }
     }
     
     //Display the outputs
-    out<<"Number of throws of the dice = "<<nThrws<<endl;
-    out<<"Number of 2's thrown  = "<<f2<<endl;
-    out<<"Number of 3's thrown  = "<<f3<<endl;
-    out<<"Number of 4's thrown  = "<<f4<<endl;
-    out<<"Number of 5's thrown  = "<<f5<<endl;
-    out<<"Number of 6's thrown  = "<<f6<<endl;
-    out<<"Number of 7's thrown  = "<<f7<<endl;
-    out<<"Number of 8's thrown  = "<<f8<<endl;
-    out<<"Number of 9's thrown  = "<<f9<<endl;
-    out<<"Number of 10's thrown = "<<f10<<endl;
-    out<<"Number of 11's thrown = "<<f11<<endl;
-    out<<"Number of 12's thrown = "<<f12<<endl;
-    out<<"Number of throws of the dice = "<<
-            f2+f3+f4+f5+f6+f7+f8+f9+f10+f11+f12<<endl;
+    cout<<"Number of games   = "<<nGames<<endl;
+    cout<<"Number of wins    = "<<wins<<endl;
+    cout<<"Number of losses  = "<<losses<<endl;
+    cout<<"Number of games   = "<<wins+losses<<endl;
+    cout<<"Percentage wins   = "<<PERCENT*wins/nGames<<"%"<<endl;
+    cout<<"Percentage losses = "<<PERCENT*losses/nGames<<"%"<<endl;
     
     //Exit stage right or left!
     in.close();
