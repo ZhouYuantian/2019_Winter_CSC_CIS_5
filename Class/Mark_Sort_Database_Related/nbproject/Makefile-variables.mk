@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=Cygwin-Windows
 CND_ARTIFACT_DIR_Debug=dist/Debug/Cygwin-Windows
-CND_ARTIFACT_NAME_Debug=mark_sort
-CND_ARTIFACT_PATH_Debug=dist/Debug/Cygwin-Windows/mark_sort
+CND_ARTIFACT_NAME_Debug=mark_sort_database_related
+CND_ARTIFACT_PATH_Debug=dist/Debug/Cygwin-Windows/mark_sort_database_related
 CND_PACKAGE_DIR_Debug=dist/Debug/Cygwin-Windows/package
-CND_PACKAGE_NAME_Debug=marksort.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/Cygwin-Windows/package/marksort.tar
+CND_PACKAGE_NAME_Debug=marksortdatabaserelated.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/Cygwin-Windows/package/marksortdatabaserelated.tar
 # Release configuration
 CND_PLATFORM_Release=Cygwin-Windows
 CND_ARTIFACT_DIR_Release=dist/Release/Cygwin-Windows
-CND_ARTIFACT_NAME_Release=mark_sort
-CND_ARTIFACT_PATH_Release=dist/Release/Cygwin-Windows/mark_sort
+CND_ARTIFACT_NAME_Release=mark_sort_database_related
+CND_ARTIFACT_PATH_Release=dist/Release/Cygwin-Windows/mark_sort_database_related
 CND_PACKAGE_DIR_Release=dist/Release/Cygwin-Windows/package
-CND_PACKAGE_NAME_Release=marksort.tar
-CND_PACKAGE_PATH_Release=dist/Release/Cygwin-Windows/package/marksort.tar
+CND_PACKAGE_NAME_Release=marksortdatabaserelated.tar
+CND_PACKAGE_PATH_Release=dist/Release/Cygwin-Windows/package/marksortdatabaserelated.tar
 #
 # include compiler specific variables
 #
