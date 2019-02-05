@@ -27,20 +27,26 @@ int main(int argc, char** argv) {
     srand(static_cast<unsigned int>(time(0)));
     
     //Declare Variables
-    const int SIZE=100;
+    const int SIZE=1000;
     int array[SIZE];
+    int utilize;
     
     //Initialize or input i.e. set variable values
-    fillAry(array,SIZE);
+    cout<<"Choose the Array Size to Sort"<<endl;
+    do{
+        cout<<"Maximum size = 1000"<<endl;
+        cin>>utilize;
+    }while(utilize>SIZE);
+    fillAry(array,utilize);
     
     //Display the outputs
-    prntAry(array,SIZE,10);
+    prntAry(array,utilize,10);
     
     //Sorted List
-    markSrt(array,SIZE);
+    markSrt(array,utilize);
     
     //Display the outputs
-    prntAry(array,SIZE,10);
+    prntAry(array,utilize,10);
 
     //Exit stage right or left!
     return 0;
