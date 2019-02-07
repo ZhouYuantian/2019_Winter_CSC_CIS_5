@@ -2,7 +2,7 @@
  * File:   main.cpp
  * Author: Dr. Mark E. Lehr
  * Created on January 30, 2019, 10:20 AM
- * Purpose:  Binary Search
+ * Purpose:  Mark Sort
  */
 
 //System Libraries
@@ -20,7 +20,6 @@ using namespace std;
 void fillAry(int [],int);
 void prntAry(int [],int,int);
 void markSrt(int [],int);
-bool binSrch(int [],int,int,int&);
 
 //Execution Begins Here!
 int main(int argc, char** argv) {
@@ -28,38 +27,29 @@ int main(int argc, char** argv) {
     srand(static_cast<unsigned int>(time(0)));
     
     //Declare Variables
-    const int SIZE=100;
+    const int SIZE=1000;
     int array[SIZE];
-    int indx,val;
+    int utilize;
     
     //Initialize or input i.e. set variable values
-    val=50;
-    fillAry(array,SIZE);
+    cout<<"Choose the Array Size to Sort"<<endl;
+    do{
+        cout<<"Maximum size = 1000"<<endl;
+        cin>>utilize;
+    }while(utilize>SIZE);
+    fillAry(array,utilize);
     
     //Display the outputs
-    prntAry(array,SIZE,10);
+    prntAry(array,utilize,10);
     
     //Sorted List
-    markSrt(array,SIZE);
+    markSrt(array,utilize);
     
     //Display the outputs
-    prntAry(array,SIZE,10);
-    if(binSrch(array,SIZE,val,indx))
-        cout<<val<<" was found at indx = "<<indx<<endl;
+    prntAry(array,utilize,10);
 
     //Exit stage right or left!
     return 0;
-}
-
-bool binSrch(int a[],int n,int val,int &middle){
-    int first=0,last=n-1;
-    do{
-        middle=(last+first)/2;
-        if(a[middle]==val)return true;
-        if(a[middle]<val) first = middle+1;
-        else              last  = middle-1;
-    }while(first<=last);
-    return false;
 }
 
 void markSrt(int a[],int n){

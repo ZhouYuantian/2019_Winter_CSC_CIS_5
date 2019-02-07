@@ -2,7 +2,7 @@
  * File:   main.cpp
  * Author: Dr. Mark E. Lehr
  * Created on January 30, 2019, 10:20 AM
- * Purpose:  Binary Search
+ * Purpose:  Mark Sort  Dynamic Arrays
  */
 
 //System Libraries
@@ -17,10 +17,9 @@ using namespace std;
 //Math/Physics/Conversions/Higher Dimensions - i.e. PI, e, etc...
 
 //Function Prototypes
-void fillAry(int [],int);
-void prntAry(int [],int,int);
-void markSrt(int [],int);
-bool binSrch(int [],int,int,int&);
+int * fillAry(int);
+void prntAry(int *,int,int);
+void markSrt(int *,int);
 
 //Execution Begins Here!
 int main(int argc, char** argv) {
@@ -28,38 +27,24 @@ int main(int argc, char** argv) {
     srand(static_cast<unsigned int>(time(0)));
     
     //Declare Variables
-    const int SIZE=100;
-    int array[SIZE];
-    int indx,val;
+    int size=100;
+    int *array;
     
     //Initialize or input i.e. set variable values
-    val=50;
-    fillAry(array,SIZE);
+    array=fillAry(size);
     
     //Display the outputs
-    prntAry(array,SIZE,10);
+    prntAry(array,size,10);
     
     //Sorted List
-    markSrt(array,SIZE);
+    markSrt(array,size);
     
     //Display the outputs
-    prntAry(array,SIZE,10);
-    if(binSrch(array,SIZE,val,indx))
-        cout<<val<<" was found at indx = "<<indx<<endl;
+    prntAry(array,size,10);
 
     //Exit stage right or left!
+    delete []array;
     return 0;
-}
-
-bool binSrch(int a[],int n,int val,int &middle){
-    int first=0,last=n-1;
-    do{
-        middle=(last+first)/2;
-        if(a[middle]==val)return true;
-        if(a[middle]<val) first = middle+1;
-        else              last  = middle-1;
-    }while(first<=last);
-    return false;
 }
 
 void markSrt(int a[],int n){
@@ -74,10 +59,12 @@ void markSrt(int a[],int n){
     }
 }
 
-void fillAry(int a[],int n){
+int *fillAry(int n){
+    int *a=new int[n];
     for(int i=0;i<n;i++){
         a[i]=rand()%90+10;//[10-99]  Just 2 digit numbers
     }
+    return a;
 }
 
 void prntAry(int a[],int n,int perLine){

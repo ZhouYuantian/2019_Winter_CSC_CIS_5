@@ -2,7 +2,7 @@
  * File:   main.cpp
  * Author: Dr. Mark E. Lehr
  * Created on January 30, 2019, 10:20 AM
- * Purpose:  Binary Search
+ * Purpose:  Binary Search with a Structure
  */
 
 //System Libraries
@@ -12,15 +12,16 @@
 using namespace std;
 
 //User Libraries
+#include "Array.h"
 
 //Global Constants, no Global Variables are allowed
 //Math/Physics/Conversions/Higher Dimensions - i.e. PI, e, etc...
 
 //Function Prototypes
-void fillAry(int [],int);
-void prntAry(int [],int,int);
-void markSrt(int [],int);
-bool binSrch(int [],int,int,int&);
+void fillAry(Array &);
+void prntAry(const Array &,int);
+void markSrt(Array &);
+bool binSrch(const Array &,int,int&);
 
 //Execution Begins Here!
 int main(int argc, char** argv) {
@@ -31,59 +32,62 @@ int main(int argc, char** argv) {
     const int SIZE=100;
     int array[SIZE];
     int indx,val;
+    Array sArray;
     
     //Initialize or input i.e. set variable values
-    val=50;
-    fillAry(array,SIZE);
+    sArray.data=array;
+    sArray.size=SIZE;
+    val=99;
+    fillAry(sArray);
     
     //Display the outputs
-    prntAry(array,SIZE,10);
+    prntAry(sArray,10);
     
     //Sorted List
-    markSrt(array,SIZE);
+    markSrt(sArray);
     
     //Display the outputs
-    prntAry(array,SIZE,10);
-    if(binSrch(array,SIZE,val,indx))
+    prntAry(sArray,10);
+    if(binSrch(sArray,val,indx))
         cout<<val<<" was found at indx = "<<indx<<endl;
 
     //Exit stage right or left!
     return 0;
 }
 
-bool binSrch(int a[],int n,int val,int &middle){
-    int first=0,last=n-1;
+bool binSrch(const Array &s,int val,int &middle){
+    int first=0,last=s.size-1;
     do{
         middle=(last+first)/2;
-        if(a[middle]==val)return true;
-        if(a[middle]<val) first = middle+1;
-        else              last  = middle-1;
+        if(s.data[middle]==val)return true;
+        if(s.data[middle]<val) first = middle+1;
+        else                   last  = middle-1;
     }while(first<=last);
     return false;
 }
 
-void markSrt(int a[],int n){
-    for(int j=0;j<n-1;j++){
-        for(int i=j+1;i<n;i++){
-            if(a[j]>a[i]){
-                int temp=a[i];
-                a[i]=a[j];
-                a[j]=temp;
+void markSrt(Array &s){
+    for(int j=0;j<s.size-1;j++){
+        for(int i=j+1;i<s.size;i++){
+            if(s.data[j]>s.data[i]){
+                int temp=s.data[i];
+                s.data[i]=s.data[j];
+                s.data[j]=temp;
             }
         }
     }
 }
 
-void fillAry(int a[],int n){
-    for(int i=0;i<n;i++){
-        a[i]=rand()%90+10;//[10-99]  Just 2 digit numbers
+void fillAry(Array &s){
+    for(int i=0;i<s.size;i++){
+        s.data[i]=rand()%90+10;//[10-99]  Just 2 digit numbers
     }
 }
 
-void prntAry(int a[],int n,int perLine){
+void prntAry(const Array &s,int perLine){
     cout<<endl;
-    for(int i=0;i<n;i++){
-        cout<<a[i]<<" ";
+    for(int i=0;i<s.size;i++){
+        cout<<s.data[i]<<" ";
         if(i%perLine==(perLine-1))cout<<endl;
     }
     cout<<endl;

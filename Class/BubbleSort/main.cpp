@@ -2,7 +2,7 @@
  * File:   main.cpp
  * Author: Dr. Mark E. Lehr
  * Created on January 30, 2019, 10:20 AM
- * Purpose:  Binary Search
+ * Purpose:  Bubble Sort
  */
 
 //System Libraries
@@ -19,8 +19,7 @@ using namespace std;
 //Function Prototypes
 void fillAry(int [],int);
 void prntAry(int [],int,int);
-void markSrt(int [],int);
-bool binSrch(int [],int,int,int&);
+void bublSrt(int [],int);
 
 //Execution Begins Here!
 int main(int argc, char** argv) {
@@ -30,48 +29,36 @@ int main(int argc, char** argv) {
     //Declare Variables
     const int SIZE=100;
     int array[SIZE];
-    int indx,val;
     
     //Initialize or input i.e. set variable values
-    val=50;
     fillAry(array,SIZE);
     
     //Display the outputs
     prntAry(array,SIZE,10);
     
     //Sorted List
-    markSrt(array,SIZE);
+    bublSrt(array,SIZE);
     
     //Display the outputs
     prntAry(array,SIZE,10);
-    if(binSrch(array,SIZE,val,indx))
-        cout<<val<<" was found at indx = "<<indx<<endl;
 
     //Exit stage right or left!
     return 0;
 }
 
-bool binSrch(int a[],int n,int val,int &middle){
-    int first=0,last=n-1;
+void bublSrt(int a[],int n){
+    bool swap;
     do{
-        middle=(last+first)/2;
-        if(a[middle]==val)return true;
-        if(a[middle]<val) first = middle+1;
-        else              last  = middle-1;
-    }while(first<=last);
-    return false;
-}
-
-void markSrt(int a[],int n){
-    for(int j=0;j<n-1;j++){
-        for(int i=j+1;i<n;i++){
-            if(a[j]>a[i]){
+        swap=false;
+        for(int i=0;i<n-1;i++){
+            if(a[i]>a[i+1]){
                 int temp=a[i];
-                a[i]=a[j];
-                a[j]=temp;
+                a[i]=a[i+1];
+                a[i+1]=temp;
+                swap=true;
             }
         }
-    }
+    }while(swap);
 }
 
 void fillAry(int a[],int n){
